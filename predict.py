@@ -3,9 +3,11 @@ from tensorflow.compat import v1 as tf
 
 from include.data import get_data_set
 from include.model import model
+import sys
 
+data_set = sys.argv[1]
 
-test_x, test_y = get_data_set("test")
+test_x, test_y = get_data_set(data_set)
 x, y, output, y_pred_cls, global_step, learning_rate = model()
 
 
@@ -41,7 +43,6 @@ def main():
     correct = (np.argmax(test_y, axis=1) == predicted_class)
     acc = correct.mean() * 100
     correct_numbers = correct.sum()
-    print()
     print("Accuracy on Test-Set: {0:.2f}% ({1} / {2})".format(acc, correct_numbers, len(test_x)))
 
 
